@@ -1,0 +1,158 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Smart Learn AI design system — dark, high-contrast, neon accents.
+ * All colors are oklch tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-neon: var(--neon);
+  --color-neon-foreground: var(--neon-foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.16 0.02 265);
+  --foreground: oklch(0.98 0.005 250);
+  --surface: oklch(0.21 0.025 265);
+  --surface-2: oklch(0.26 0.03 265);
+  --card: oklch(0.21 0.025 265);
+  --card-foreground: oklch(0.98 0.005 250);
+  --popover: oklch(0.21 0.025 265);
+  --popover-foreground: oklch(0.98 0.005 250);
+  --primary: oklch(0.82 0.19 160);
+  --primary-foreground: oklch(0.16 0.02 265);
+  --secondary: oklch(0.28 0.04 265);
+  --secondary-foreground: oklch(0.98 0.005 250);
+  --muted: oklch(0.26 0.03 265);
+  --muted-foreground: oklch(0.74 0.02 260);
+  --accent: oklch(0.72 0.19 250);
+  --accent-foreground: oklch(0.14 0.02 265);
+  --neon: oklch(0.85 0.2 195);
+  --neon-foreground: oklch(0.14 0.02 265);
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 250);
+  --border: oklch(0.32 0.03 265);
+  --input: oklch(0.32 0.03 265);
+  --ring: oklch(0.82 0.19 160);
+  --gradient-neon: linear-gradient(135deg, var(--primary), var(--neon) 55%, var(--accent));
+  --gradient-surface: linear-gradient(160deg, var(--surface-2), var(--surface));
+  --shadow-neon: 0 0 0 1px color-mix(in oklab, var(--primary) 35%, transparent),
+    0 12px 40px -12px color-mix(in oklab, var(--primary) 45%, transparent);
+  --shadow-soft: 0 10px 30px -18px oklch(0 0 0 / 0.9);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overscroll-behavior-y: none;
+    background-image:
+      radial-gradient(70% 50% at 50% -10%, color-mix(in oklab, var(--accent) 22%, transparent), transparent),
+      radial-gradient(60% 40% at 100% 100%, color-mix(in oklab, var(--primary) 14%, transparent), transparent);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility panel {
+  background-image: var(--gradient-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility neon-text {
+  background-image: var(--gradient-neon);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility neon-ring {
+  box-shadow: var(--shadow-neon);
+}
+
+@utility gradient-neon {
+  background-image: var(--gradient-neon);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes sweep {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@utility animate-pulse-dot {
+  animation: pulse-dot 1.4s ease-in-out infinite;
+}
+
+@utility animate-scanline {
+  animation: scanline 2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@utility animate-rise {
+  animation: rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
